@@ -135,7 +135,7 @@ namespace ClientApplication
 
         }
 
-        //Method used to read Xmlfiles
+        //Method used to read Xmlfiles 
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();

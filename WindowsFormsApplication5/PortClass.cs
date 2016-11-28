@@ -108,8 +108,8 @@ class PortClass
         IPEndPoint receivedEndPoint = (IPEndPoint)cloudEndPoint;
 
         //generujemy logi
-        Console.WriteLine("Otrzymaliśmy pakiet od: " + receivedEndPoint.Address + " port " + receivedEndPoint.Port);
-        Console.WriteLine("Pakieto to: " + Encoding.UTF8.GetString(receivedPacket));
+        //Console.WriteLine("Otrzymaliśmy pakiet od: " + receivedEndPoint.Address + " port " + receivedEndPoint.Port);
+        //Console.WriteLine("Pakieto to: " + Encoding.UTF8.GetString(receivedPacket));
 
         //wysyłamy otrzymany pakiet do metody przetwarzającej
         ProcessReceivedPacket(receivedPacket);

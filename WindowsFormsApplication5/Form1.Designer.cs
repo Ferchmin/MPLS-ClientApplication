@@ -34,12 +34,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnEnableDataFlow = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbNewLabel = new System.Windows.Forms.TextBox();
-            this.btnLabelSwitch = new System.Windows.Forms.Button();
+            this.btnReceiverSwitch = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnDisableDataFlow = new System.Windows.Forms.Button();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbSwitchReceiver = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,28 +83,21 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 48);
+            this.label2.Location = new System.Drawing.Point(2, 47);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "New label:";
+            this.label2.Text = "New receiver";
             // 
-            // tbNewLabel
+            // btnReceiverSwitch
             // 
-            this.tbNewLabel.Location = new System.Drawing.Point(5, 64);
-            this.tbNewLabel.Name = "tbNewLabel";
-            this.tbNewLabel.Size = new System.Drawing.Size(146, 20);
-            this.tbNewLabel.TabIndex = 5;
-            // 
-            // btnLabelSwitch
-            // 
-            this.btnLabelSwitch.Location = new System.Drawing.Point(157, 64);
-            this.btnLabelSwitch.Name = "btnLabelSwitch";
-            this.btnLabelSwitch.Size = new System.Drawing.Size(75, 23);
-            this.btnLabelSwitch.TabIndex = 6;
-            this.btnLabelSwitch.Text = "Switch label";
-            this.btnLabelSwitch.UseVisualStyleBackColor = true;
-            this.btnLabelSwitch.Click += new System.EventHandler(this.btnLabelSwitch_Click);
+            this.btnReceiverSwitch.Location = new System.Drawing.Point(157, 64);
+            this.btnReceiverSwitch.Name = "btnReceiverSwitch";
+            this.btnReceiverSwitch.Size = new System.Drawing.Size(75, 23);
+            this.btnReceiverSwitch.TabIndex = 6;
+            this.btnReceiverSwitch.Text = "Switch";
+            this.btnReceiverSwitch.UseVisualStyleBackColor = true;
+            this.btnReceiverSwitch.Click += new System.EventHandler(this.btnLabelSwitch_Click);
             // 
             // pictureBox1
             // 
@@ -143,17 +136,25 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Type here data, which you want to send";
             // 
+            // cbSwitchReceiver
+            // 
+            this.cbSwitchReceiver.FormattingEnabled = true;
+            this.cbSwitchReceiver.Location = new System.Drawing.Point(5, 63);
+            this.cbSwitchReceiver.Name = "cbSwitchReceiver";
+            this.cbSwitchReceiver.Size = new System.Drawing.Size(146, 21);
+            this.cbSwitchReceiver.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(233, 409);
+            this.Controls.Add(this.cbSwitchReceiver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.btnDisableDataFlow);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnLabelSwitch);
-            this.Controls.Add(this.tbNewLabel);
+            this.Controls.Add(this.btnReceiverSwitch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnEnableDataFlow);
             this.Controls.Add(this.label1);
@@ -179,12 +180,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEnableDataFlow;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbNewLabel;
-        private System.Windows.Forms.Button btnLabelSwitch;
+        private System.Windows.Forms.Button btnReceiverSwitch;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnDisableDataFlow;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbSwitchReceiver;
     }
 }
 

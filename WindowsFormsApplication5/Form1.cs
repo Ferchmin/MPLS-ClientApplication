@@ -24,6 +24,8 @@ namespace ClientApplication
        private string logRegisterFilepath;
        private int packetId = 1;
        private string word;
+        private int labelReceiverLength;
+       int[] labelReceiver;
         //Generator, which is used to send data package continously with 4 seconds delay
         System.Timers.Timer GeneratorsTimer = new System.Timers.Timer();
 
@@ -128,6 +130,8 @@ namespace ClientApplication
         public Form1()
         {
         InitializeComponent();
+            labelReceiver = new int[2];
+          //  = new List<int>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -153,16 +157,73 @@ namespace ClientApplication
             localIpAddress = xDoc.SelectSingleNode("clientConfig/Data/localIpAddress").InnerText;
             localPortNumber = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/localPortNumber").InnerText);
             label = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/label").InnerText);
+            labelReceiverLength = 1;
+
+            for (int i = 0; i < labelReceiverLength; i++)
+            {   
+                string path = String.Format("clientConfig/Data/pair{0}/labelReceiver", i);
+                int value = Int32.Parse(xDoc.SelectSingleNode(path).InnerText);
+                labelReceiver[i] = value;
+            }
+
+            for (int i = 0; i < labelReceiver.Length; ++i)
+            {
+                string path = String.Format("clientConfig/Data/pair{0}/ipAddressReceiver", i);
+               cbSwitchReceiver.Items.Add (xDoc.SelectSingleNode(path).InnerText);
+            }
+
+
+
+
+
+
+
 
             MessageBox.Show(cloudIpAddress + cloudPortNumber + localPortNumber + label);
-
             WriteLogs(1);
+
 
         }
         //Button which switch labels
         private void btnLabelSwitch_Click(object sender, EventArgs e) 
         {
-            label = Int32.Parse(tbNewLabel.Text);
+            if (cbSwitchReceiver.Text == "127.0.0.1")
+            {
+                label = labelReceiver[0];
+            }
+
+            if (cbSwitchReceiver.Text == "127.0.0.2")
+            {
+                label = labelReceiver[1];
+            }
+
+            if (cbSwitchReceiver.Text == "127.0.0.3")
+            {
+                label = labelReceiver[2];
+            }
+
+            if (cbSwitchReceiver.Text == "127.0.0.4")
+            {
+                label = labelReceiver[3];
+            }
+
+            if (cbSwitchReceiver.Text == "127.0.0.5")
+            {
+                label = labelReceiver[4];
+            }
+
+            if (cbSwitchReceiver.Text == "127.0.0.6")
+            {
+                label = labelReceiver[5];
+            }
+
+            if (cbSwitchReceiver.Text == "127.0.0.7")
+            {
+                label = labelReceiver[6];
+            }
+
+
+
         }
 
         private void btnEnableDataFlow_Click(object sender, EventArgs e)
@@ -174,7 +235,7 @@ namespace ClientApplication
             GeneratorsTimer.AutoReset = true;
             GeneratorsTimer.Enabled = true;
             GeneratorsTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            GeneratorsTimer.Interval = 1000;
+            GeneratorsTimer.Interval = 6000;
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)

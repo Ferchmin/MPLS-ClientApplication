@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using System.Timers;
 using System.Windows.Forms;
 using System.Xml;
@@ -24,8 +24,10 @@ namespace ClientApplication
        private string logRegisterFilepath;
        private int packetId = 1;
        private string word;
-        private int labelReceiverLength;
+       int labelAmmount;
        int[] labelReceiver;
+        List<int> lstLabelReceiver = new List<int>();
+        List<string> lstIpAdressReceiver = new List<string>();
         //Generator, which is used to send data package continously with 4 seconds delay
         System.Timers.Timer GeneratorsTimer = new System.Timers.Timer();
 
@@ -157,19 +159,23 @@ namespace ClientApplication
             localIpAddress = xDoc.SelectSingleNode("clientConfig/Data/localIpAddress").InnerText;
             localPortNumber = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/localPortNumber").InnerText);
             label = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/label").InnerText);
-            labelReceiverLength = 1;
+            labelAmmount = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/labelAmmount").InnerText);
+           
 
-            for (int i = 0; i < labelReceiverLength; i++)
+            for (int i = 0; i < labelAmmount; i++)
             {   
                 string path = String.Format("clientConfig/Data/pair{0}/labelReceiver", i);
                 int value = Int32.Parse(xDoc.SelectSingleNode(path).InnerText);
-                labelReceiver[i] = value;
+              //  labelReceiver[i] = value;
+                lstLabelReceiver.Add(value); 
             }
 
-            for (int i = 0; i < labelReceiver.Length; ++i)
+            for (int i = 0; i < labelAmmount; ++i)
             {
-                string path = String.Format("clientConfig/Data/pair{0}/ipAddressReceiver", i);
-               cbSwitchReceiver.Items.Add (xDoc.SelectSingleNode(path).InnerText);
+               string path = String.Format("clientConfig/Data/pair{0}/ipAddressReceiver", i);
+               string value = xDoc.SelectSingleNode(path).InnerText;
+               cbSwitchReceiver.Items.Add(value);
+               lstIpAdressReceiver.Add(value);
             }
 
 
@@ -179,7 +185,7 @@ namespace ClientApplication
 
 
 
-            MessageBox.Show(cloudIpAddress + cloudPortNumber + localPortNumber + label);
+            MessageBox.Show("Config has been loaded." + Environment.NewLine +  "Choose reciever in order to find proper label");
             WriteLogs(1);
 
 
@@ -187,40 +193,14 @@ namespace ClientApplication
         //Button which switch labels
         private void btnLabelSwitch_Click(object sender, EventArgs e) 
         {
-            if (cbSwitchReceiver.Text == "127.0.0.1")
+
+            for (int i = 0; i < labelAmmount; ++i)
+                if (cbSwitchReceiver.Text == lstIpAdressReceiver[i])
             {
-                label = labelReceiver[0];
+                label = lstLabelReceiver[i];
             }
 
-            if (cbSwitchReceiver.Text == "127.0.0.2")
-            {
-                label = labelReceiver[1];
-            }
-
-            if (cbSwitchReceiver.Text == "127.0.0.3")
-            {
-                label = labelReceiver[2];
-            }
-
-            if (cbSwitchReceiver.Text == "127.0.0.4")
-            {
-                label = labelReceiver[3];
-            }
-
-            if (cbSwitchReceiver.Text == "127.0.0.5")
-            {
-                label = labelReceiver[4];
-            }
-
-            if (cbSwitchReceiver.Text == "127.0.0.6")
-            {
-                label = labelReceiver[5];
-            }
-
-            if (cbSwitchReceiver.Text == "127.0.0.7")
-            {
-                label = labelReceiver[6];
-            }
+            
 
 
 

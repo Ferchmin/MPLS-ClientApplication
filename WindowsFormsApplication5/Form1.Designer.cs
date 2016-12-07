@@ -32,15 +32,13 @@
             this.tbFilePath = new System.Windows.Forms.TextBox();
             this.btnLoadConfig = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnEnableDataFlow = new System.Windows.Forms.Button();
+            this.btnSendMessage = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnReceiverSwitch = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnDisableDataFlow = new System.Windows.Forms.Button();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbSwitchReceiver = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lstMessage = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // tbFilePath
@@ -49,7 +47,8 @@
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.Size = new System.Drawing.Size(146, 20);
             this.tbFilePath.TabIndex = 0;
-            this.tbFilePath.Text = "C:\\Users\\Piotrek\\Desktop\\img\\XMLApp\\XMLApp\\bin\\Debug\\client1.xml";
+            this.tbFilePath.Text = "C:\\Users\\Piotrek\\Desktop\\Config Files\\clientsConfigFiles\\client4.xml";
+            this.tbFilePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnLoadConfig
             // 
@@ -70,15 +69,15 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "ConfigPath:";
             // 
-            // btnEnableDataFlow
+            // btnSendMessage
             // 
-            this.btnEnableDataFlow.Location = new System.Drawing.Point(5, 315);
-            this.btnEnableDataFlow.Name = "btnEnableDataFlow";
-            this.btnEnableDataFlow.Size = new System.Drawing.Size(227, 42);
-            this.btnEnableDataFlow.TabIndex = 3;
-            this.btnEnableDataFlow.Text = "Enable data flow";
-            this.btnEnableDataFlow.UseVisualStyleBackColor = true;
-            this.btnEnableDataFlow.Click += new System.EventHandler(this.btnEnableDataFlow_Click);
+            this.btnSendMessage.Location = new System.Drawing.Point(5, 220);
+            this.btnSendMessage.Name = "btnSendMessage";
+            this.btnSendMessage.Size = new System.Drawing.Size(227, 42);
+            this.btnSendMessage.TabIndex = 3;
+            this.btnSendMessage.Text = "Send Message";
+            this.btnSendMessage.UseVisualStyleBackColor = true;
+            this.btnSendMessage.Click += new System.EventHandler(this.btnEnableDataFlow_Click);
             // 
             // label2
             // 
@@ -99,30 +98,9 @@
             this.btnReceiverSwitch.UseVisualStyleBackColor = true;
             this.btnReceiverSwitch.Click += new System.EventHandler(this.btnLabelSwitch_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 90);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(227, 180);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnDisableDataFlow
-            // 
-            this.btnDisableDataFlow.Location = new System.Drawing.Point(5, 363);
-            this.btnDisableDataFlow.Name = "btnDisableDataFlow";
-            this.btnDisableDataFlow.Size = new System.Drawing.Size(227, 42);
-            this.btnDisableDataFlow.TabIndex = 8;
-            this.btnDisableDataFlow.Text = "Disable data flow";
-            this.btnDisableDataFlow.UseVisualStyleBackColor = true;
-            this.btnDisableDataFlow.Click += new System.EventHandler(this.btnDisableDataFlow_Click);
-            // 
             // tbMessage
             // 
-            this.tbMessage.Location = new System.Drawing.Point(5, 289);
+            this.tbMessage.Location = new System.Drawing.Point(5, 194);
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.Size = new System.Drawing.Size(227, 20);
             this.tbMessage.TabIndex = 9;
@@ -130,7 +108,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 273);
+            this.label3.Location = new System.Drawing.Point(2, 178);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(197, 13);
             this.label3.TabIndex = 11;
@@ -144,19 +122,26 @@
             this.cbSwitchReceiver.Size = new System.Drawing.Size(146, 21);
             this.cbSwitchReceiver.TabIndex = 12;
             // 
+            // lstMessage
+            // 
+            this.lstMessage.FormattingEnabled = true;
+            this.lstMessage.Location = new System.Drawing.Point(5, 93);
+            this.lstMessage.Name = "lstMessage";
+            this.lstMessage.Size = new System.Drawing.Size(227, 82);
+            this.lstMessage.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 409);
+            this.ClientSize = new System.Drawing.Size(233, 266);
+            this.Controls.Add(this.lstMessage);
             this.Controls.Add(this.cbSwitchReceiver);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbMessage);
-            this.Controls.Add(this.btnDisableDataFlow);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReceiverSwitch);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnEnableDataFlow);
+            this.Controls.Add(this.btnSendMessage);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnLoadConfig);
             this.Controls.Add(this.tbFilePath);
@@ -167,7 +152,6 @@
             this.Text = "ClientNode";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,14 +162,13 @@
         private System.Windows.Forms.TextBox tbFilePath;
         private System.Windows.Forms.Button btnLoadConfig;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnEnableDataFlow;
+        private System.Windows.Forms.Button btnSendMessage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnReceiverSwitch;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnDisableDataFlow;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbSwitchReceiver;
+        private System.Windows.Forms.ListBox lstMessage;
     }
 }
 

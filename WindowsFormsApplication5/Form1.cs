@@ -126,27 +126,29 @@ namespace ClientApplication
 
                 path = String.Format("clientConfig/Data/pair{0}/ipAddressReceiver", i);
                 value = xDoc.SelectSingleNode(path).InnerText;
-                cbSwitchReceiver.Items.Add(value);
+               
                 lstIpAdressReceiver.Add(value);
 
                 path = String.Format("clientConfig/Data/pair{0}/nickName", i);
                 value = xDoc.SelectSingleNode(path).InnerText;
                 lstNicknames.Add(value);
+                cbSwitchReceiver.Items.Add(value);
             }
            
             pc = new PortClass(localIpAddress, localPortNumber, cloudIpAddress, cloudPortNumber, this);
             MessageBox.Show("Config has been loaded." + Environment.NewLine +  "Choose reciever in order to find proper label");
             WriteLogs("Client Application has been initialized");
+            btnReceiverSwitch.Enabled= true;
 
         }
         //Button which switch labels
         private void btnLabelSwitch_Click(object sender, EventArgs e) 
         {
-            for (int i = 0; i < labelAmmount; ++i)
-            if (cbSwitchReceiver.Text == lstIpAdressReceiver[i])
+            for (int i = 0; i < labelAmmount; i++)
+            if (cbSwitchReceiver.Text == lstNicknames[i])
             {
                label = lstLabelReceiver[i];
-               MessageBox.Show(label.ToString());
+               btnSendMessage.Enabled = true;
                   
             }
 

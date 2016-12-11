@@ -71,6 +71,7 @@
             // 
             // btnSendMessage
             // 
+            this.btnSendMessage.Enabled = false;
             this.btnSendMessage.Location = new System.Drawing.Point(5, 220);
             this.btnSendMessage.Name = "btnSendMessage";
             this.btnSendMessage.Size = new System.Drawing.Size(227, 42);
@@ -90,6 +91,7 @@
             // 
             // btnReceiverSwitch
             // 
+            this.btnReceiverSwitch.Enabled = false;
             this.btnReceiverSwitch.Location = new System.Drawing.Point(157, 64);
             this.btnReceiverSwitch.Name = "btnReceiverSwitch";
             this.btnReceiverSwitch.Size = new System.Drawing.Size(75, 23);

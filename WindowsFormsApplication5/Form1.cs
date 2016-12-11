@@ -15,25 +15,17 @@ namespace ClientApplication
         private string localIpAddress;
         private int localPortNumber;
         private int label;
-        //Table, which contains words from our message
-        string[] words;
-        //Identifier to words table
-        private int idWords = 0;
         private int logId = 1;
-        private int clientNumber;
         private string logRegisterFilepath;
         private int packetId = 1;
-        private string word;
         int labelAmmount;
-        int[] labelReceiver;
+        int clientNumber;
         byte[] packet;
-       List<int> lstLabelReceiver = new List<int>();
-       List<string> lstIpAdressReceiver = new List<string>();
-       List<string> lstNicknames = new List<string>();
-        //Generator, which is used to send data package continously with 4 seconds delay
-        System.Timers.Timer GeneratorsTimer = new System.Timers.Timer();
+        List<int> lstLabelReceiver = new List<int>();
+        List<string> lstIpAdressReceiver = new List<string>();
+        List<string> lstNicknames = new List<string>();
         string nickname;
-       PortClass pc;
+        PortClass pc;
        
 
         #endregion Private Variables
@@ -64,14 +56,10 @@ namespace ClientApplication
             get { return label; }
             set { label = value; }
         }
-        public string[] Words
-        {
-            get { return words; }  
-        }
+        
         public string LogRegisterFilepath
         {
-             get { return logRegisterFilepath; }
-             
+             get { return logRegisterFilepath; }  
         }
 
         #endregion Public Properties
@@ -80,8 +68,6 @@ namespace ClientApplication
         //Method, which writes log to a file
         private void WriteLogs(string logDescription)
         {
-
-
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(logRegisterFilepath, true))
             {
@@ -95,6 +81,7 @@ namespace ClientApplication
         public Form1()
         {
         InitializeComponent();
+        
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -134,25 +121,19 @@ namespace ClientApplication
             for (int i = 0; i < labelAmmount; i++)
             {
                 string path = String.Format("clientConfig/Data/pair{0}/labelReceiver", i);
-                int value = Int32.Parse(xDoc.SelectSingleNode(path).InnerText);
-
-                lstLabelReceiver.Add(value);
-
-            }
-            for (int i = 0; i < labelAmmount; i++)
-            {
-               string path = String.Format("clientConfig/Data/pair{0}/ipAddressReceiver", i);
-               string value = xDoc.SelectSingleNode(path).InnerText;
-               cbSwitchReceiver.Items.Add(value);
-               lstIpAdressReceiver.Add(value);
-            }
-            for (int i = 0; i < labelAmmount; i++)
-            {
-                string path = String.Format("clientConfig/Data/pair{0}/nickName", i);
                 string value = xDoc.SelectSingleNode(path).InnerText;
+                lstLabelReceiver.Add(Int32.Parse(value));
+
+                path = String.Format("clientConfig/Data/pair{0}/ipAddressReceiver", i);
+                value = xDoc.SelectSingleNode(path).InnerText;
+                cbSwitchReceiver.Items.Add(value);
+                lstIpAdressReceiver.Add(value);
+
+                path = String.Format("clientConfig/Data/pair{0}/nickName", i);
+                value = xDoc.SelectSingleNode(path).InnerText;
                 lstNicknames.Add(value);
             }
-
+           
             pc = new PortClass(localIpAddress, localPortNumber, cloudIpAddress, cloudPortNumber, this);
             MessageBox.Show("Config has been loaded." + Environment.NewLine +  "Choose reciever in order to find proper label");
             WriteLogs("Client Application has been initialized");
@@ -167,7 +148,7 @@ namespace ClientApplication
                label = lstLabelReceiver[i];
                MessageBox.Show(label.ToString());
                   
-                }
+            }
 
         }
 
@@ -175,18 +156,20 @@ namespace ClientApplication
         {
             // char[] delimiterChars = { ' ', ',', '.', ':' };
             string message = tbMessage.Text;
+            tbMessage.Clear();
             // MessageBox.Show(word);
             int messageLength = message.Length;
             int[] mpls_label = { label };
 
             lstMessage.Items.Add("Our Department"  + ": " + message);
+           lstMessage.TopIndex = lstMessage.Items.Count - 1;
             ++packetId;
 
             MPLSPacket newPacket = new MPLSPacket();
             packet = newPacket.CreatePacket(1, 1, (ushort)label, localIpAddress, cbSwitchReceiver.Text, (ushort)messageLength, message);
             WriteLogs("Message has been sent. Message text: " + message);
-        
-             pc.SendMyPacket(packet);
+              
+              pc.SendMyPacket(packet);
         }
 
 
@@ -195,7 +178,8 @@ namespace ClientApplication
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             try
-            { WriteLogs("Client Application has been shut down");
+            {
+            WriteLogs("Client Application has been shut down");
             }
             catch
             {

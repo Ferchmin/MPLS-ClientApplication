@@ -92,8 +92,6 @@ namespace ClientApplication
             //kończymy wysyłanie pakietu - funkcja zwraca rozmiar wysłanego pakietu
             int size = client.EndSendTo(res);
 
-            //tworzmy log zdarzenia
-            Console.WriteLine("Wysłano pakiet o rozmiarze:" + size);
         }
 
         /*

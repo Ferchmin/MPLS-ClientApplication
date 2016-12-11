@@ -47,7 +47,7 @@
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.Size = new System.Drawing.Size(146, 20);
             this.tbFilePath.TabIndex = 0;
-            this.tbFilePath.Text = "C:\\Users\\Piotrek\\Desktop\\Config Files\\clientsConfigFiles\\client4.xml";
+            this.tbFilePath.Text = "C:\\Users\\Piotrek\\Desktop\\Config Files\\clientsConfigFiles\\client1.xml";
             this.tbFilePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnLoadConfig
@@ -71,6 +71,7 @@
             // 
             // btnSendMessage
             // 
+            this.btnSendMessage.Enabled = false;
             this.btnSendMessage.Location = new System.Drawing.Point(5, 220);
             this.btnSendMessage.Name = "btnSendMessage";
             this.btnSendMessage.Size = new System.Drawing.Size(227, 42);
@@ -90,6 +91,7 @@
             // 
             // btnReceiverSwitch
             // 
+            this.btnReceiverSwitch.Enabled = false;
             this.btnReceiverSwitch.Location = new System.Drawing.Point(157, 64);
             this.btnReceiverSwitch.Name = "btnReceiverSwitch";
             this.btnReceiverSwitch.Size = new System.Drawing.Size(75, 23);
@@ -125,6 +127,8 @@
             // lstMessage
             // 
             this.lstMessage.FormattingEnabled = true;
+            this.lstMessage.HorizontalScrollbar = true;
+            this.lstMessage.ImeMode = System.Windows.Forms.ImeMode.On;
             this.lstMessage.Location = new System.Drawing.Point(5, 93);
             this.lstMessage.Name = "lstMessage";
             this.lstMessage.Size = new System.Drawing.Size(227, 82);
@@ -148,6 +152,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(100, 100);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "ClientNode";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

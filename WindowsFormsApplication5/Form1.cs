@@ -122,7 +122,7 @@ namespace ClientApplication
 
             //Loading parametrese
             clientNumber = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/clientNumber").InnerText);
-            logRegisterFilepath = String.Format("C:/Users/Piotrek/Desktop/Log Files/clientLogs/LogsRegister{0}.txt", clientNumber);
+            logRegisterFilepath = String.Format("LogsRegister{0}.txt", clientNumber);
             cloudIpAddress = xDoc.SelectSingleNode("clientConfig/Data/cloudIpAddress").InnerText;
             cloudPortNumber = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/cloudPortNumber").InnerText);
             localIpAddress = xDoc.SelectSingleNode("clientConfig/Data/localIpAddress").InnerText;

@@ -47,8 +47,7 @@
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.Size = new System.Drawing.Size(146, 20);
             this.tbFilePath.TabIndex = 0;
-            this.tbFilePath.Text = "C:\\Users\\Piotrek\\Desktop\\Config Files\\clientsConfigFiles\\client1.xml";
-            this.tbFilePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbFilePath.Text = "C_1.xml";
             // 
             // btnLoadConfig
             // 
@@ -153,7 +152,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "ClientNode";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

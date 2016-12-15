@@ -26,8 +26,8 @@ namespace ClientApplication
         List<string> lstNicknames = new List<string>();
         string nickname;
         PortClass pc;
-       
-
+        string ipWhereFrom;
+        string ipWhereTo;
         #endregion Private Variables
 
         #region Public Properties
@@ -72,7 +72,7 @@ namespace ClientApplication
             new System.IO.StreamWriter(logRegisterFilepath, true))
             {
 
-                file.WriteLine(logId + " " + cloudIpAddress + " " + DateTime.Now.ToString("hh:mm:ss") + " " + logDescription);
+                file.WriteLine(logId + " " + "|" + " " + DateTime.Now.ToString("hh:mm:ss") + " INFO: " + logDescription);
                 ++logId;
             }
         }
@@ -109,7 +109,7 @@ namespace ClientApplication
 
             //Loading parametrese
             clientNumber = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/clientNumber").InnerText);
-            logRegisterFilepath = String.Format("C:/Users/Piotrek/Desktop/Log Files/clientLogs/LogsRegister{0}.txt", clientNumber);
+            logRegisterFilepath = String.Format("Logs/C_{0}Logs.txt", clientNumber);
             cloudIpAddress = xDoc.SelectSingleNode("clientConfig/Data/cloudIpAddress").InnerText;
             cloudPortNumber = Int32.Parse(xDoc.SelectSingleNode("clientConfig/Data/cloudPortNumber").InnerText);
             localIpAddress = xDoc.SelectSingleNode("clientConfig/Data/localIpAddress").InnerText;
@@ -163,13 +163,18 @@ namespace ClientApplication
             int messageLength = message.Length;
             int[] mpls_label = { label };
 
-            lstMessage.Items.Add("Our Department"  + ": " + message);
+           lstMessage.Items.Add("Our Department"  + ": " + message);
            lstMessage.TopIndex = lstMessage.Items.Count - 1;
             ++packetId;
-
+            for (int i = 0; i < labelAmmount; ++i)
+                if (cbSwitchReceiver.Text == lstNicknames[i])
+                {
+                    
+                    ipWhereTo = lstIpAdressReceiver[i];
+                }
             MPLSPacket newPacket = new MPLSPacket();
-            packet = newPacket.CreatePacket(1, 1, (ushort)label, localIpAddress, cbSwitchReceiver.Text, (ushort)messageLength, message);
-            WriteLogs("Message has been sent. Message text: " + message);
+            packet = newPacket.CreatePacket(1, 1, (ushort)label, localIpAddress, ipWhereTo, (ushort)messageLength, message);
+            WriteLogs("Message was sent to: " + ipWhereTo + ". Data: " + message);
               
               pc.SendMyPacket(packet);
         }
@@ -200,16 +205,20 @@ namespace ClientApplication
 
             //ip adres zrodla -test.IpSource;
             //wiadomosc - test.Data;
-           // string nickname;
-            for  (int i = 0; i < labelAmmount; ++i)
-            if (test.IpSource == lstIpAdressReceiver[i])
-            nickname = lstNicknames[i];
+            // string nickname;
+            string ipWhereFrom = test.IpSource;
+            for (int i = 0; i < labelAmmount; i++)
+                if (test.IpSource == lstIpAdressReceiver[i])
+                {
+                    nickname = lstNicknames[i];
                     
+
+                }
 
             string messageToDisplay = nickname + ": " + test.Data;
             this.Invoke(new MethodInvoker(delegate () { lstMessage.Items.Add(messageToDisplay); }));
             //wyswietlanie na kontrolkach
-            WriteLogs("Recieved message from: " + nickname + ". Data: "  + test.Data);
+            WriteLogs("Recieved message from: " + ipWhereFrom + ". Data: "  + test.Data);
         }
 
     }
